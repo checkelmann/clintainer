@@ -50,9 +50,18 @@ RUN curl -L -o osm.tar.gz https://github.com/openservicemesh/osm/releases/downlo
 RUN curl -s --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp && \
     sudo mv /tmp/eksctl /usr/local/bin
 
-# Dowload and install yq
+# Install yq
 RUN sudo curl -sL https://github.com/mikefarah/yq/releases/download/2.4.1/yq_linux_amd64 -o /usr/local/bin/yq
 RUN sudo chmod +x /usr/local/bin/yq
 
+# k9s
+RUN curl -sL https://github.com/derailed/k9s/releases/download/v0.22.1/k9s_Linux_x86_64.tar.gz -o k9s.tar.gz && \
+    tar -xzvf k9s.tar.gz && chmod +x k9s && sudo mv k9s /usr/local/bin && rm LICENSE README.md
+
+# kubectx & kubens
+RUN curl -sL https://github.com/ahmetb/kubectx/releases/download/v0.9.1/kubectx_v0.9.1_linux_x86_64.tar.gz -o /tmp/kubectx.tar.gz && \
+    tar -C /tmp -xzvf /tmp/kubectx.tar.gz && chmod +x /tmp/kubectx && sudo mv /tmp/kubectx /usr/local/bin
+RUN curl -sL https://github.com/ahmetb/kubectx/releases/download/v0.9.1/kubens_v0.9.1_linux_x86_64.tar.gz -o /tmp/kubens.tar.gz && \
+    tar -C /tmp -xzvf /tmp/kubens.tar.gz && chmod +x /tmp/kubens && sudo mv /tmp/kubens /usr/local/bin && rm /tmp/LICENSE
 
 CMD ["/usr/bin/zsh"]

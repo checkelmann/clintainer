@@ -23,5 +23,7 @@ docker run -v ~/.kube/config:/home/commander/.kube/config -it checkelmann/clinta
 - istioctl (istio.io)
 - OpenServiceMesh (github.com/openservicemesh)
 - eksctl
+- k9s (github.com/derailed/k9s)
+- kubectx & kubens (github.com/ahmetb/kubectx)
 
 ## If you want more, just open an issue or feel free to contribute!
