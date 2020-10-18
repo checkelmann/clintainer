@@ -1,14 +1,19 @@
 # clintainer
 
-Docker Container loaded with a lot of K8s CLI's like kubectl, helm, istio and keptn preloaded with Oh My ZSH
+Docker Container loaded with a lot of K8s CLI's like kubectl, helm, istio and keptn preloaded with Oh My ZSH.
 
+If you need to work on a remote server and don't want to install all the tools manually, or for ad-hoc operation tasks.
 
 ![Screenshot](screenshot.png)
 
-Just run:
+## Run clintainer
 
 ```
 docker run -v ~/.kube/config:/home/commander/.kube/config -it checkelmann/clintainer
+```
+## Cleanup
+```
+docker rmi checkelmann/clintainer
 ```
 
 ## Included tools:
@@ -26,4 +31,4 @@ docker run -v ~/.kube/config:/home/commander/.kube/config -it checkelmann/clinta
 - k9s (github.com/derailed/k9s)
 - kubectx & kubens (github.com/ahmetb/kubectx)
 
-## If you want more, just open an issue or feel free to contribute!
+__If you want more, just open an issue or feel free to contribute!__
