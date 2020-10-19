@@ -13,7 +13,7 @@ If you need to work on a remote server and don't want to install all the tools m
 ## Run clintainer
 
 ```
-docker run -v ~/.kube/config:/home/commander/.kube/config -it checkelmann/clintainer
+docker run -v ~/.kube/config:/home/operator/.kube/config -it checkelmann/clintainer
 ```
 ## Cleanup
 ```
