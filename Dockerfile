@@ -43,7 +43,8 @@ RUN curl -sL https://istio.io/downloadIstioctl | sudo sh -
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
 
 # Install Openservicemesh cli
-RUN curl -L -o osm.tar.gz https://github.com/openservicemesh/osm/releases/download/v0.4.2/osm-v0.4.2-linux-amd64.tar.gz && \
+RUN OSM_RELEASE=$(curl --silent "https://api.github.com/repos/openservicemesh/osm/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    curl -L -o osm.tar.gz https://github.com/openservicemesh/osm/releases/download/$OSM_RELEASE/osm-$OSM_RELEASE-linux-amd64.tar.gz && \
     tar -xzvf osm.tar.gz && chmod +x linux-amd64/osm && sudo mv linux-amd64/osm /usr/local/bin/osm && rm -rf linux-amd64 osm.tar.gz
 
 # Install eksctl
@@ -51,17 +52,20 @@ RUN curl -s --location "https://github.com/weaveworks/eksctl/releases/download/l
     sudo mv /tmp/eksctl /usr/local/bin
 
 # Install yq
-RUN sudo curl -sL https://github.com/mikefarah/yq/releases/download/2.4.1/yq_linux_amd64 -o /usr/local/bin/yq
+RUN YQ_RELEASE=$(curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    sudo curl -sL https://github.com/mikefarah/yq/releases/download/$YQ_RELEASE/yq_linux_amd64 -o /usr/local/bin/yq
 RUN sudo chmod +x /usr/local/bin/yq
 
 # k9s
-RUN curl -sL https://github.com/derailed/k9s/releases/download/v0.22.1/k9s_Linux_x86_64.tar.gz -o k9s.tar.gz && \
+RUN K9S_RELEASE=$(curl --silent "https://api.github.com/repos/derailed/k9s/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    curl -sL https://github.com/derailed/k9s/releases/download/$K9S_RELEASE/k9s_Linux_x86_64.tar.gz -o k9s.tar.gz && \
     tar -xzvf k9s.tar.gz && chmod +x k9s && sudo mv k9s /usr/local/bin && rm LICENSE README.md
 
 # kubectx & kubens
-RUN curl -sL https://github.com/ahmetb/kubectx/releases/download/v0.9.1/kubectx_v0.9.1_linux_x86_64.tar.gz -o /tmp/kubectx.tar.gz && \
-    tar -C /tmp -xzvf /tmp/kubectx.tar.gz && chmod +x /tmp/kubectx && sudo mv /tmp/kubectx /usr/local/bin
-RUN curl -sL https://github.com/ahmetb/kubectx/releases/download/v0.9.1/kubens_v0.9.1_linux_x86_64.tar.gz -o /tmp/kubens.tar.gz && \
+RUN KUBECTX_RELEASE=$(curl --silent "https://api.github.com/repos/ahmetb/kubectx/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    curl -sL https://github.com/ahmetb/kubectx/releases/download/$KUBECTX_RELEASE/kubectx_${KUBECTX_RELEASE}_linux_x86_64.tar.gz -o /tmp/kubectx.tar.gz && \
+    tar -C /tmp -xzvf /tmp/kubectx.tar.gz && chmod +x /tmp/kubectx && sudo mv /tmp/kubectx /usr/local/bin && \
+    curl -sL https://github.com/ahmetb/kubectx/releases/download/$KUBECTX_RELEASE/kubens_${KUBECTX_RELEASE}_linux_x86_64.tar.gz -o /tmp/kubens.tar.gz && \
     tar -C /tmp -xzvf /tmp/kubens.tar.gz && chmod +x /tmp/kubens && sudo mv /tmp/kubens /usr/local/bin && rm /tmp/LICENSE
 
 CMD ["/usr/bin/zsh"]
