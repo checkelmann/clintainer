@@ -1,6 +1,10 @@
 # clintainer
 
+[![Build Status](https://travis-ci.com/checkelmann/clintainer.svg?branch=main)](https://travis-ci.com/checkelmann/clintainer)
+
 Docker Container loaded with a lot of K8s CLI's like kubectl, helm, istio and keptn preloaded with Oh My ZSH.
+
+This image will be automatically build every week and is using the latest available releases of the tools.
 
 If you need to work on a remote server and don't want to install all the tools manually, or for ad-hoc operation tasks.
 
