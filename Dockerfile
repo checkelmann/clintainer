@@ -16,15 +16,15 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN locale-gen en_US.UTF-8
 
-RUN useradd -rm -d /home/commander -p "$(openssl passwd -1 commander)" -s /bin/bash -g root -G sudo -u 1001 commander
-RUN echo "commander     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -rm -d /home/operator -p "$(openssl passwd -1 operator)" -s /bin/bash -g root -G sudo -u 1001 operator
+RUN echo "operator     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER commander
-WORKDIR /home/commander
+USER operator
+WORKDIR /home/operator
 # Install OhMyZsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-COPY .zshrc /home/commander
+COPY .zshrc /home/operator
 
 # Install BIT
 RUN sudo curl -sf https://gobinaries.com/chriswalz/bit | sh; sudo curl -sf https://gobinaries.com/chriswalz/bit/bitcomplete | sh && echo y | sudo COMP_INSTALL=1 bitcomplete;
