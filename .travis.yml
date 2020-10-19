@@ -3,7 +3,7 @@ services:
 
 script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker build -t checkelmann/clintainer .
+    - docker build --pull --cache-from checkelmann/clintainer -t checkelmann/clintainer .
     - docker push checkelmann/clintainer
 
     
