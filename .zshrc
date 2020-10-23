@@ -78,6 +78,9 @@ source $ZSH/oh-my-zsh.sh
 # istioctl
 export PATH=$PATH:$HOME/.istioctl/bin
 
+# kubectl bash completion
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
