@@ -10,14 +10,51 @@ If you need to work on a remote server and don't want to install all the tools m
 
 ![Screenshot](screenshot.png)
 
-## Run clintainer
+## Run clintainer on Docker
 
 ```
 docker run -v ~/.kube/config:/home/operator/.kube/config -it checkelmann/clintainer
 ```
-## Cleanup
+### Cleanup
 ```
 docker rmi checkelmann/clintainer
+```
+
+## Run clintainer as cluster-admin in K8s
+
+1. Create a clintainer service account with kubectl
+
+```
+kubectl create serviceaccount clintainer --namespace kube-system
+```
+
+2. Create a clintainer-rolebinding.yaml file with the following content
+
+```
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: clintainer-clusterrolebinding
+subjects:
+- kind: ServiceAccount
+  name: clintainer
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: ""
+```
+
+3. Deploy the rolebinding
+```
+kubectl apply -f clintainer-rolebinding.yaml
+```
+
+
+4. Run clintainer
+
+```
+kubectl run clintainer -n kube-system --image=checkelmann/clintainer -it --rm --restart=Never --serviceaccount=clintainer
 ```
 
 ## Included tools:
