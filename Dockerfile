@@ -32,6 +32,8 @@ RUN sudo curl -sf https://gobinaries.com/chriswalz/bit | sh; sudo curl -sf https
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+# Add kubectl bash completion
+RUN echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc    
 
 # Install keptn-cli
 RUN curl -sL https://get.keptn.sh | sudo -E bash
