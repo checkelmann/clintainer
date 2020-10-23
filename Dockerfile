@@ -43,7 +43,7 @@ RUN curl -sL https://istio.io/downloadIstioctl | sudo sh -
 # Install helm3
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
 # Adding zsh completion
-RUN helm completion zsh > "${fpath[1]}/_helm"
+RUN /usr/local/bin/helm completion zsh > "/home/operator/.oh-my-zsh/plugins/git/_helm"
 
 # Install Openservicemesh cli
 RUN OSM_RELEASE=$(curl --silent "https://api.github.com/repos/openservicemesh/osm/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
