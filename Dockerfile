@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 LABEL maintainer="Christian Heckelmann <checkelmann@gmail.com>"
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y curl \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y curl \
         jq \
         zsh \
         git \
