@@ -50,11 +50,26 @@ roleRef:
 kubectl apply -f clintainer-rolebinding.yaml
 ```
 
-
 4. Run clintainer
 
 ```
 kubectl run clintainer -n kube-system --image=checkelmann/clintainer -it --rm --restart=Never --serviceaccount=clintainer
+```
+
+5. Cleanup
+```
+kubectl delete -f clintainer-rolebinding.yaml
+kubectl delete serviceaccount clintainer --namespace kube-system
+```
+
+### All in one (if you trust external Manifests)
+
+```
+kubectl create serviceaccount clintainer --namespace kube-system
+kubectl apply -f https://raw.githubusercontent.com/checkelmann/clintainer/main/rolebinding.yaml
+kubectl run clintainer -n kube-system --image=checkelmann/clintainer -it --rm --restart=Never --serviceaccount=clintainer
+kubectl delete -f https://raw.githubusercontent.com/checkelmann/clintainer/main/rolebinding.yaml
+kubectl delete serviceaccount clintainer --namespace kube-system
 ```
 
 ## Included tools:
