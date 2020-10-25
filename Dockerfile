@@ -17,6 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN locale-gen en_US.UTF-8
 
+# Install keptn-cli
+RUN curl -sL https://get.keptn.sh | sudo -E bash
+
 RUN useradd -rm -d /home/operator -p "$(openssl passwd -1 operator)" -s /bin/bash -g root -G sudo -u 1001 operator
 RUN echo "operator     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -33,9 +36,6 @@ RUN sudo curl -sf https://gobinaries.com/chriswalz/bit | sh; sudo curl -sf https
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
-
-# Install keptn-cli
-RUN curl -sL https://get.keptn.sh | sudo -E bash
 
 # Install istioclt
 RUN curl -sL https://istio.io/downloadIstioctl | sudo sh -
