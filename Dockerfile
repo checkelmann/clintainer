@@ -28,7 +28,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 COPY .zshrc /home/operator
 
 # Install BIT
-RUN sudo curl -sf https://gobinaries.com/chriswalz/bit | sh; && echo y | sudo COMP_INSTALL=1 bit complete;
+RUN sudo curl -sf https://gobinaries.com/chriswalz/bit | sh; echo y | sudo COMP_INSTALL=1 bit complete;
 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
