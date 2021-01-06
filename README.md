@@ -83,8 +83,12 @@ kubectl delete serviceaccount clintainer --namespace kube-system
 - helm3 (helm.sh)
 - istioctl (istio.io)
 - OpenServiceMesh (github.com/openservicemesh)
-- eksctl
+- eksctl (eksctl.io)
 - k9s (github.com/derailed/k9s)
 - kubectx & kubens (github.com/ahmetb/kubectx)
+- stern (github.com/wercker/stern)
+- kubespy (github.com/pulumi/kubespy)
+- kube-shell (github.com/cloudnativelabs/kube-shell)
+- AWS CLI
 
 __If you want more, just open an issue or feel free to contribute!__

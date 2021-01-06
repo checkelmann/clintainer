@@ -13,7 +13,8 @@ RUN apt-get update && apt-get upgrade -y && \
         locales \
         apt-transport-https \
         gettext \
-        fzf
+        fzf \
+        python3-pip
 
 RUN locale-gen en_US.UTF-8
 
@@ -70,5 +71,24 @@ RUN KUBECTX_RELEASE=$(curl --silent "https://api.github.com/repos/ahmetb/kubectx
     tar -C /tmp -xzvf /tmp/kubectx.tar.gz && chmod +x /tmp/kubectx && sudo mv /tmp/kubectx /usr/local/bin && \
     curl -sL https://github.com/ahmetb/kubectx/releases/download/$KUBECTX_RELEASE/kubens_${KUBECTX_RELEASE}_linux_x86_64.tar.gz -o /tmp/kubens.tar.gz && \
     tar -C /tmp -xzvf /tmp/kubens.tar.gz && chmod +x /tmp/kubens && sudo mv /tmp/kubens /usr/local/bin && rm /tmp/LICENSE
+
+# kubespy
+RUN SPY_RELEASE=$(curl --silent "https://api.github.com/repos/pulumi/kubespy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    sudo curl -sL https://github.com/pulumi/kubespy/releases/download/$SPY_RELEASE/kubespy-$SPY_RELEASE-linux-amd64.tar.gz -o /tmp/kubespy.tar.gz && \
+    tar -C /tmp -xzvf /tmp/kubespy.tar.gz && chmod +x /tmp/kubespy && sudo mv /tmp/kubespy /usr/local/bin
+
+# stern
+RUN STERN_RELEASE=$(curl --silent "https://api.github.com/repos/wercker/stern/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    sudo curl -sL https://github.com/wercker/stern/releases/download/$STERN_RELEASE/stern_linux_amd64 -o /usr/local/bin/stern && \
+    sudo chmod +x /usr/local/bin/stern
+
+# kube-shell
+RUN sudo pip3 install kube-shell
+
+# aws cli
+RUN sudo pip3 install awscli
+
+# cleanup
+RUN sudo rm -rf /tmp/* && sudo apt-get clean 
 
 CMD ["/usr/bin/zsh"]
