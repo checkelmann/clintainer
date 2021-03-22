@@ -90,5 +90,6 @@ kubectl delete serviceaccount clintainer --namespace kube-system
 - kubespy (github.com/pulumi/kubespy)
 - kube-shell (github.com/cloudnativelabs/kube-shell)
 - AWS CLI
+- Dynatrace Monaco (github.com/dynatrace-oss/dynatrace-monitoring-as-code)
 
 __If you want more, just open an issue or feel free to contribute!__

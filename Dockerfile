@@ -85,6 +85,12 @@ RUN STERN_RELEASE=$(curl --silent "https://api.github.com/repos/wercker/stern/re
 # kube-shell
 RUN sudo pip3 install kube-shell
 
+# monaco
+RUN MONACO_RELEASE=$(curl --silent "https://api.github.com/repos/dynatrace-oss/dynatrace-monitoring-as-code/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
+    sudo curl -sL https://github.com/dynatrace-oss/dynatrace-monitoring-as-code/releases/download/$MONACO_RELEASE/monaco-linux-amd64 -o /usr/local/bin/monaco && \
+    sudo chmod +x /usr/local/bin/monaco
+
+
 # aws cli
 RUN sudo pip3 install awscli
 
