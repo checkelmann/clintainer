@@ -1,4 +1,4 @@
-FROM ubuntu:21.10
+FROM ubuntu:20.04
 
 LABEL maintainer="Christian Heckelmann <checkelmann@gmail.com>"
 
@@ -7,6 +7,7 @@ RUN apt-get update && apt-get upgrade -y && \
         jq \
         zsh \
         git \
+        git-lfs \
         fonts-powerline \
         sudo \
         locales \
