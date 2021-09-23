@@ -7,7 +7,6 @@ RUN apt-get update && apt-get upgrade -y && \
         jq \
         zsh \
         git \
-        git-lfs \
         fonts-powerline \
         sudo \
         locales \
