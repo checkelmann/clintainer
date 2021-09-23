@@ -61,9 +61,9 @@ RUN YQ_RELEASE=$(curl --silent "https://api.github.com/repos/mikefarah/yq/releas
     sudo curl -sL https://github.com/mikefarah/yq/releases/download/$YQ_RELEASE/yq_linux_amd64 -o /usr/local/bin/yq
 RUN sudo chmod +x /usr/local/bin/yq
 
-# k9s
+# k9s https://github.com/derailed/k9s/releases/download/v0.24.15/k9s_Linux_x86_64.tar.gz
 RUN K9S_RELEASE=$(curl --silent "https://api.github.com/repos/derailed/k9s/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
-    curl -sL https://github.com/derailed/k9s/releases/download/$K9S_RELEASE/k9s_${K9S_RELEASE}_Linux_x86_64.tar.gz -o k9s.tar.gz && \
+    curl -sL https://github.com/derailed/k9s/releases/download/$K9S_RELEASE/k9s_Linux_x86_64.tar.gz -o k9s.tar.gz && \
     tar -xzvf k9s.tar.gz && chmod +x k9s && sudo mv k9s /usr/local/bin && rm LICENSE README.md k9s.tar.gz    
 
 # kubectx & kubens
