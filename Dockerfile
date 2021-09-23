@@ -54,7 +54,7 @@ RUN OSM_RELEASE=$(curl --silent "https://api.github.com/repos/openservicemesh/os
 # Install eksctl
 RUN EKSCTL_RELEASE=$(curl --silent "https://api.github.com/repos/weaveworks/eksctl/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
     curl -L -o eksctl.tar.gz https://github.com/weaveworks/eksctl/releases/download/$EKSCTL_RELEASE/eksctl_$(uname -s)_amd64.tar.gz && \
-    tar -xzvf eksctl.tar.gz && chmod +x eksctl && sudo mv /tmp/eksctl /usr/local/bin
+    tar -xzvf eksctl.tar.gz && chmod +x eksctl && sudo mv eksctl /usr/local/bin
 
 # Install yq
 RUN YQ_RELEASE=$(curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') && \
